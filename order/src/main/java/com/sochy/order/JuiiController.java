@@ -13,4 +13,8 @@ public class JuiiController {
     public List<String> index(){
         return List.of("juii","ot","ss");
     }
+    @GetMapping("/ekerk")
+    public List<String> index2(){
+        return List.of("juii","ot","ss");
+    }
 }
