@@ -1,0 +1,49 @@
+services:
+  eureka-server:
+    build:
+      context: ./eureka
+    volumes:
+      - ./eureka:/app
+    ports:
+      - "8761:8761"
+    networks:
+      - micro-net
+
+  api-gateway:
+    build:
+      context: ./apigateway
+    volumes:
+      - ./apigateway:/app
+    ports:
+      - "8080:8080"
+    networks:
+      - micro-net
+    depends_on:
+      - eureka-server
+
+  product-service:
+    build:
+      context: ./product
+    volumes:
+      - ./product:/app
+    ports:
+      - "8081:8081"
+    networks:
+      - micro-net
+    depends_on:
+      - eureka-server
+
+  order-service:
+    build:
+      context: ./order
+    volumes:
+      - ./order:/app
+    ports:
+      - "8082:8082"
+    networks:
+      - micro-net
+    depends_on:
+      - eureka-server
+
+networks:
+  micro-net:
